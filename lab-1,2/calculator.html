@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Калькулятор вкладов</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      width: 300px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    select, input, button {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+    .result {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <label for="depositType">Вид вклада</label>
+  <select id="depositType" onchange="updateTerms()">
+    <option value="">Выберите</option>
+    <option value="Пополняемый">Пополняемый</option>
+    <option value="Срочный">Срочный</option>
+  </select>
+
+  <label for="depositTerm">Срок вклада</label>
+  <select id="depositTerm"></select>
+
+  <label for="amount">Сумма, руб</label>
+  <input type="number" id="amount" placeholder="Введите сумму">
+
+  <button onclick="calculateDeposit()">Рассчитать</button>
+
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+  const rates = {
+    'Пополняемый': {
+      '6 месяцев': 20,
+      '1 год': 22,
+      '1,5 года': 15,
+      '2 года': 10
+    },
+    'Срочный': {
+      '3 месяца': 20,
+      '6 месяцев': 22,
+      '9 месяцев': 23,
+      '1 год': 24,
+      '1,5 года': 18,
+      '2 года': 15
+    }
+  };
+
+  function updateTerms() {
+    let type = document.getElementById("depositType").value;
+    let termSelect = document.getElementById("depositTerm");
+    termSelect.innerHTML = "";
+
+    if (type && rates[type]) {
+      Object.keys(rates[type]).forEach(term => {
+        let option = document.createElement("option");
+        option.value = term;
+        option.textContent = term;
+        termSelect.appendChild(option);
+      });
+    }
+  }
+
+  function calculateDeposit() {
+    let type = document.getElementById("depositType").value;
+    let term = document.getElementById("depositTerm").value;
+    let amount = parseFloat(document.getElementById("amount").value);
+    let resultDiv = document.getElementById("result");
+
+    if (!type || !term || isNaN(amount) || amount <= 0) {
+      resultDiv.textContent = "Пожалуйста, заполните все поля корректно.";
+      return;
+    }
+
+    let rate = rates[type][term];
+    let finalAmount = amount * (1 + rate / 100);
+
+    resultDiv.textContent = `Вклад "${type}" на срок "${term}" на сумму ${amount} руб.\nВ конце срока вы получите ${finalAmount.toFixed(2)} руб.`;
+  }
+</script>
+</body>
+</html>
