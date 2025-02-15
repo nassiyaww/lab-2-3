@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Поиск вакансий HH.ru</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #vacancies {
+      margin-top: 20px;
+    }
+    .vacancy {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+<h1>Поиск вакансий на HH.ru</h1>
+<label for="search"></label><input type="text" id="search" placeholder="Введите профессию" />
+<button onclick="searchVacancies()">Поиск</button>
+<div id="vacancies"></div>
+
+<script>
+  async function searchVacancies() {
+    const query = document.getElementById('search').value;
+    const url = `https://api.hh.ru/vacancies?text=${encodeURIComponent(query)}`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      const vacanciesDiv = document.getElementById('vacancies');
+      vacanciesDiv.innerHTML = '';
+
+      data.items.forEach(vacancy => {
+        const vacancyElement = document.createElement('div');
+        vacancyElement.className = 'vacancy';
+        vacancyElement.innerHTML = `
+                        <h3><a href="${vacancy.alternate_url}" target="_blank">${vacancy.name}</a></h3>
+                        <p><strong>Компания:</strong> ${vacancy.employer.name}</p>
+                        <p><strong>Город:</strong> ${vacancy.area.name}</p>
+                        <p><strong>Зарплата:</strong> ${vacancy.salary ? (vacancy.salary.from ? vacancy.salary.from : '') + ' - ' + (vacancy.salary.to ? vacancy.salary.to : '') + ' ' + vacancy.salary.currency : 'Не указана'}</p>
+                    `;
+        vacanciesDiv.appendChild(vacancyElement);
+      });
+    } catch (error) {
+      console.error('Ошибка загрузки вакансий:', error);
+    }
+  }
+</script>
+</body>
+</html>
