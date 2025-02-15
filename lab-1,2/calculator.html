@@ -68,6 +68,7 @@
   function updateTerms() {
     let type = document.getElementById("depositType").value;
     let termSelect = document.getElementById("depositTerm");
+    //unsafe
     termSelect.innerHTML = "";
 
     if (type && rates[type]) {

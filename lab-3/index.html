@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Слайдер галлерея</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title></title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="css/style.css">
 
   <meta name="description" content="">
 
@@ -16,44 +16,15 @@
   <meta property="og:image" content="">
   <meta property="og:image:alt" content="">
 
-  <link rel="icon" href="/lab-3/favicon.ico" sizes="any">
-  <link rel="icon" href="/lab-3/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="./favicon.ico" sizes="any">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon.png">
 
   <link rel="manifest" href="site.webmanifest">
-  <style>
-    .swiper {
-      display: flex;
-      height: 100dvh;
-      width: 100%;
-    }
-
-    .swiper-slide {
-      text-align: center;
-      font-size: 18px;
-      background: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .swiper-slide img {
-      display: block;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-      border-radius: 14px;
-    }
-
-    body h1 {
-      text-align: center;
-      font-family: sans-serif;
-    }
-  </style>
   <meta name="theme-color" content="#fafafa">
 </head>
 
 <body>
-<!-- Swiper -->
 <h1>
   Swiper Demo
 </h1>
@@ -90,38 +61,6 @@
   <div class="swiper-button-next"></div>
   <div class="swiper-button-prev"></div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-<script>
-  var swiper = new Swiper(".mySwiper", {
-    slidesPerView: "auto",
-    spaceBetween: 10,
-    // Responsive breakpoints
-    breakpoints: {
-      // when window width is >= 320px
-      320: {
-        slidesPerView: 2,
-        spaceBetween: 20
-      },
-      // when window width is >= 480px
-      480: {
-        slidesPerView: 3,
-        spaceBetween: 30
-      },
-      // when window width is >= 640px
-      640: {
-        slidesPerView: 4,
-        spaceBetween: 40
-      }
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-  });
-</script>
-
+<script defer src="./js/app.js"></script>
 </body>
-
 </html>

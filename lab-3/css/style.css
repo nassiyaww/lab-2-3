@@ -245,3 +245,29 @@ textarea {
   }
 }
 
+.swiper {
+  display: flex;
+  height: 100dvh;
+  width: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+body h1 {
+  text-align: center;
+  font-family: sans-serif;
+}
